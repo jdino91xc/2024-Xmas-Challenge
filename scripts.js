@@ -1,114 +1,81 @@
+// Songs array
 const songs = [
-    { song: 'Up on the House Top', artist: 'Gene Autry', release: 1947 },
-    { song: 'Up on the Roof', artist: 'The Drifters', release: 1964 },
-    { song: 'Down by the River', artist: 'Neil Young', release: 1969 },
-    { song: 'Down on the Corner', artist: 'CCR', release: 1969 },
-    { song: 'Left in the Dark', artist: 'Barbra Streisand', release: 1984 },
-    { song: 'Fight for your Right', artist: 'Beastie Boys', release: 1986 },
-    { song: 'She Left Me on Friday', artist: 'Shed Seven', release: 1999 },
-    { song: 'Everything in its Right Place', artist: 'Radiohead', release: 2000 },
-    { song: 'B&E', artist: 'Nothing', release: 2012 },
-    { song: 'A Sky Full of Stars', artist: 'Coldplay', release: 2014 },
-    { song: 'Start the Healing', artist: 'Korn', release: 2021 },
-    { song: 'Party All the Time', artist: 'Eddie Murphy', release: 1985 },
-    { song: 'Sheep Go to Heaven', artist: 'Cake', release: 1998 },
-    { song: 'The World\'s Biggest Paving Slab', artist: 'English Teacher', release: 2024 },
-    { song: 'Deeper Underground', artist: 'Jamiroquai', release: 1998 },
-    { song: 'Float On', artist: 'Modest Mouse', release: 2004 },
-    { song: 'The Middle', artist: 'Jimmy Eat World', release: 2001 },
-    { song: 'Overkill', artist: 'Men at Work', release: 1983 },
-    { song: 'Jesus Just Left Chicago', artist: 'ZZ Top', release: 1973 },
-    { song: 'Sleigh Ride', artist: 'Ella Fitzgerald', release: 1960 }
+    { id: 1, name: "Up on the House Top", artist: "Gene Autry" },
+    { id: 2, name: "Up on the Roof", artist: "The Drifters" },
+    { id: 3, name: "Down by the River", artist: "Neil Young" },
+    { id: 4, name: "Down on the Corner", artist: "CCR" },
+    { id: 5, name: "Left in the Dark", artist: "Barbra Streisand" },
+    { id: 6, name: "Fight for your Right", artist: "Beastie Boys" },
+    { id: 7, name: "She Left Me on Friday", artist: "Shed Seven" },
+    { id: 8, name: "Everything in its Right Place", artist: "Radiohead" },
+    { id: 9, name: "B&E", artist: "Nothing" },
+    { id: 10, name: "A Sky Full of Stars", artist: "Coldplay" },
+    { id: 11, name: "Start the Healing", artist: "Korn" },
+    { id: 12, name: "Party All the Time", artist: "Eddie Murphy" },
+    { id: 13, name: "Sheep Go to Heaven", artist: "Cake" },
+    { id: 14, name: "The World's Biggest Paving Slab", artist: "English Teacher" },
+    { id: 15, name: "Deeper Underground", artist: "Jamiroquai" },
+    { id: 16, name: "Float On", artist: "Modest Mouse" },
+    { id: 17, name: "The Middle", artist: "Jimmy Eat World" },
+    { id: 18, name: "Overkill", artist: "Men at Work" },
+    { id: 19, name: "Jesus Just Left Chicago", artist: "ZZ Top" },
+    { id: 20, name: "Sleigh Ride", artist: "Ella Fitzgerald" }
 ];
 
-let shuffledSongs = shuffleArray(songs);
+// Correct order by song ID
+const correctOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
-const leftColumn = document.getElementById('left-column');
-const rightColumn = document.getElementById('right-column');
-const dropArea = document.getElementById('drop-area');
-const resultDiv = document.getElementById('result');
+// Shuffle songs and distribute to columns
+const shuffledSongs = [...songs].sort(() => 0.5 - Math.random());
+const column1 = document.getElementById('column1');
+const column2 = document.getElementById('column2');
 
-let dropSlots = [];
+shuffledSongs.forEach((song, index) => {
+    const songItem = document.createElement('div');
+    songItem.classList.add('song-item');
+    songItem.draggable = true;
+    songItem.textContent = `${song.name} - ${song.artist}`;
+    songItem.dataset.id = song.id;
+    songItem.addEventListener('dragstart', dragStart);
+    if (index < 10) column1.appendChild(songItem);
+    else column2.appendChild(songItem);
+});
 
-// Shuffle the songs randomly
-function shuffleArray(array) {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-}
-
-// Create song item elements for drag-and-drop
-function createSongItem(song, parent) {
-    const songElement = document.createElement('div');
-    songElement.textContent = song.song;
-    songElement.draggable = true;
-    songElement.classList.add('song-item');
-    songElement.addEventListener('dragstart', (event) => handleDragStart(event));
-    parent.appendChild(songElement);
-}
-
-// Handle the drag start event
-function handleDragStart(event) {
-    event.dataTransfer.setData('text', event.target.textContent);
-}
-
-// Create drop slots for the user to drag items into
-function createDropSlot(index) {
+// Populate drop area with empty slots
+const dropArea = document.getElementById('dropArea');
+for (let i = 0; i < correctOrder.length; i++) {
     const dropSlot = document.createElement('div');
     dropSlot.classList.add('drop-slot');
-    dropSlot.addEventListener('dragover', handleDragOver);
-    dropSlot.addEventListener('drop', (event) => handleDrop(event, dropSlot));
-    return dropSlot;
+    dropSlot.dataset.slot = i + 1;
+    dropSlot.addEventListener('dragover', dragOver);
+    dropSlot.addEventListener('drop', dropSong);
+    dropArea.appendChild(dropSlot);
 }
 
-// Allow dragging over the drop slot
-function handleDragOver(event) {
+// Drag and drop functionality
+let draggedItem = null;
+
+function dragStart(event) {
+    draggedItem = event.target;
+}
+
+function dragOver(event) {
     event.preventDefault();
 }
 
-// Handle dropping the song into a drop slot
-function handleDrop(event, dropSlot) {
-    event.preventDefault();
-    const draggedSong = event.dataTransfer.getData('text');
-    dropSlot.textContent = draggedSong;
-}
-
-// Set up the puzzle
-function setupPuzzle() {
-    shuffledSongs.forEach((song, index) => {
-        if (index < 10) {
-            createSongItem(song, leftColumn);
-        } else {
-            createSongItem(song, rightColumn);
-        }
-    });
-
-    for (let i = 1; i <= 11; i++) {
-        const dropSlot = createDropSlot(i);
-        dropSlots.push(dropSlot);
-        dropArea.appendChild(dropSlot);
+function dropSong(event) {
+    if (draggedItem) {
+        event.target.textContent = draggedItem.textContent;
+        event.target.dataset.id = draggedItem.dataset.id;
     }
 }
 
-// Check the order of the songs
+// Check the order
 function checkOrder() {
-    const orderedSongs = Array.from(dropArea.children).map(slot => slot.textContent);
-    const correctOrder = [
-        'Up on the House Top', 'Up on the Roof', 'Down by the River',
-        'Down on the Corner', 'Left in the Dark', 'Fight for your Right',
-        'She Left Me on Friday', 'Everything in its Right Place',
-        'B&E', 'A Sky Full of Stars', 'Start the Healing'
-    ];
-
-    if (orderedSongs.join(',') === correctOrder.join(',')) {
-        resultDiv.textContent = '🎉 Congratulations! The code is: 3, 1, 5 🎉';
+    const userOrder = Array.from(dropArea.children).map(slot => slot.dataset.id);
+    if (JSON.stringify(userOrder) === JSON.stringify(correctOrder.map(String))) {
+        document.getElementById('result').textContent = "Correct! The code is 3, 1, 5.";
     } else {
-        resultDiv.textContent = '❌ Incorrect order. Please try again! ❌';
+        document.getElementById('result').textContent = "Incorrect. Try again!";
     }
 }
-
-// Initialize the puzzle setup
-setupPuzzle();
