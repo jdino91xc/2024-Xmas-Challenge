@@ -26,8 +26,9 @@ const songs = [
 const shuffledSongs = songs.sort(() => Math.random() - 0.5);
 
 // Divide songs into two columns
-const leftColumn = shuffledSongs.slice(0, Math.ceil(shuffledSongs.length / 2));
-const rightColumn = shuffledSongs.slice(Math.ceil(shuffledSongs.length / 2));
+const halfLength = Math.ceil(shuffledSongs.length / 2);
+const leftColumn = shuffledSongs.slice(0, halfLength);
+const rightColumn = shuffledSongs.slice(halfLength);
 
 // Render songs in columns
 const initialSongsLeft = document.getElementById('initial-songs-left');
