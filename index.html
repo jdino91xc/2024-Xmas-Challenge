@@ -4,27 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Song Order Puzzle</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Holiday Song Order Puzzle</h1>
-        <h2>Drag and drop the songs in the correct order!</h2>
+        <h1>Song Order Puzzle</h1>
+        <p>Drag and drop songs into the correct order to unlock the code!</p>
     </header>
-
     <div id="container">
-        <div id="available-songs" class="available-songs">
-            <div id="left-column" class="song-column"></div>
-            <div id="right-column" class="song-column"></div>
+        <div class="available-songs">
+            <div class="song-column" id="column1"></div>
+            <div class="song-column" id="column2"></div>
         </div>
-        <div id="drop-area" class="drop-area"></div>
+        <div class="drop-area" id="dropArea"></div>
     </div>
-
-    <footer>
-        <button onclick="checkOrder()">Check Order</button>
-        <div id="result"></div>
-    </footer>
-
-    <script src="scripts.js"></script>
+    <button onclick="checkOrder()">Check Order</button>
+    <div id="result"></div>
+    <script src="script.js"></script>
 </body>
 </html>
