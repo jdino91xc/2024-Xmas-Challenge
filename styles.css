@@ -68,7 +68,7 @@ footer {
 }
 
 #available-songs .song-item {
-    margin: 10px;
+    margin: 5px;
     padding: 10px;
     background-color: #f1f1f1;
     border-radius: 5px;
@@ -76,13 +76,27 @@ footer {
 }
 
 #drop-area .drop-slot {
-    margin: 10px;
-    padding: 10px;
+    margin: 5px;
+    padding: 5px;
     background-color: #ffe0b3;
     border-radius: 5px;
     width: 80%;
-    min-height: 50px;
+    min-height: 60px;  /* Set a consistent height for all rows */
     border: 1px dashed #ccc;
+}
+
+/* Ensure all columns are equally spaced */
+.song-column, .drop-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#container {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
 }
 
 #result {
@@ -90,31 +104,3 @@ footer {
     font-weight: bold;
     margin-top: 20px;
 }
-/* Existing styles in your CSS file */
-
-/* ... other styles ... */
-
-/* Updated CSS for slimmer rows in the drop area */
-.drop-area {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 35%;
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: white;
-    border-radius: 10px;
-    min-height: 300px;
-}
-
-.drop-slot {
-    margin: 5px;  /* Reduced margin for slimmer appearance */
-    padding: 5px; /* Reduced padding for slimmer rows */
-    background-color: #ffe0b3;
-    border-radius: 5px;
-    width: 80%;
-    min-height: 40px;  /* Reduced height */
-    border: 1px dashed #ccc;
-}
-
