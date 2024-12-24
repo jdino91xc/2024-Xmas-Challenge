@@ -8,7 +8,7 @@ body {
 }
 
 header {
-    background-color: #F80004; /* Christmas red */
+    background-color: #F80004 !important; /* Enforce Christmas red */
     color: white;
     padding: 20px;
     text-align: center;
@@ -20,8 +20,8 @@ header:before {
     position: absolute;
     left: 20px;
     top: 50%;
-    transform: translateY(-50%); /* Align vertically */
-    font-size: 4em; /* Larger tree size */
+    transform: translateY(-50%); /* Vertically centered */
+    font-size: 5em; /* Larger size for Christmas tree */
 }
 
 header:after {
@@ -29,10 +29,11 @@ header:after {
     position: absolute;
     right: 20px;
     top: 50%;
-    transform: translateY(-50%); /* Align vertically */
-    font-size: 4em; /* Larger tree size */
+    transform: translateY(-50%); /* Vertically centered */
+    font-size: 5em; /* Larger size for Christmas tree */
 }
 
+/* Flexbox container for the puzzle */
 #container {
     display: flex;
     justify-content: space-between;
