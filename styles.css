@@ -46,6 +46,16 @@ footer {
     margin-top: 20px;
 }
 
+#available-songs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.song-column {
+    width: 45%;
+    padding: 10px;
+}
+
 #initial-songs div, #drop-area div {
     margin: 10px;
     padding: 10px;
