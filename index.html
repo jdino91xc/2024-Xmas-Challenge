@@ -12,11 +12,15 @@
         <p>Drag and drop songs into the correct order to unlock the code!</p>
     </header>
     <div id="container">
+        <!-- Two columns for songs -->
         <div class="available-songs">
             <div class="song-column" id="column1"></div>
             <div class="song-column" id="column2"></div>
         </div>
-        <div class="drop-area" id="dropArea"></div>
+        <!-- Drop area for ordering -->
+        <div class="drop-area" id="dropArea">
+            <!-- Drop slots will be created dynamically -->
+        </div>
     </div>
     <button onclick="checkOrder()">Check Order</button>
     <div id="result"></div>
