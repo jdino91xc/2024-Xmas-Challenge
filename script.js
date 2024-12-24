@@ -1,3 +1,4 @@
+console.log("Script loaded, preparing to render songs...");
 // Song data
 const songs = [
     { code: 'Up', name: 'Up on the House Top', artist: 'Gene Autry', year: 1947, order: 1 },
@@ -24,7 +25,11 @@ const songs = [
 
 // Render the songs
 const songsList = document.getElementById('songs-list');
-
+if (!songsList) {
+    console.error("Error: #songs-list element not found.");
+} else {
+    console.log("Rendering songs...");
+}
 songs.forEach((song) => {
     const songElement = document.createElement('div');
     songElement.className = 'song';
@@ -33,7 +38,7 @@ songs.forEach((song) => {
     songElement.textContent = `${song.name} - ${song.artist} (${song.year})`;
     songsList.appendChild(songElement);
 });
-
+console.log("Songs rendered successfully.");
 // Drag-and-drop functionality
 let draggedElement = null;
 
