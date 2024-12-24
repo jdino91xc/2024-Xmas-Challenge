@@ -14,7 +14,8 @@ const songs = [
 
 let shuffledSongs = shuffleArray(songs);
 
-const initialSongsContainer = document.getElementById('initial-songs');
+const leftColumn = document.getElementById('left-column');
+const rightColumn = document.getElementById('right-column');
 const dropArea = document.getElementById('drop-area');
 const resultDiv = document.getElementById('result');
 
@@ -68,8 +69,12 @@ function handleDrop(event, dropSlot) {
 
 // Set up the puzzle
 function setupPuzzle() {
-    shuffledSongs.forEach((song) => {
-        createSongItem(song, initialSongsContainer);
+    shuffledSongs.forEach((song, index) => {
+        if (index < 6) {
+            createSongItem(song, leftColumn);
+        } else {
+            createSongItem(song, rightColumn);
+        }
     });
 
     for (let i = 1; i <= 11; i++) {
