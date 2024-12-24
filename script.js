@@ -11,20 +11,21 @@ const songs = [
     { code: 'B', name: 'B&E', artist: 'Nothing', year: 2012, order: 9 },
     { code: 'A', name: 'A Sky Full of Stars', artist: 'Coldplay', year: 2014, order: 10 },
     { code: 'Start', name: 'Start the Healing', artist: 'Korn', year: 2021, order: 11 },
-    { code: 'Not part of code', name: 'Party All the Time', artist: 'Eddie Murphy', year: 1985, order: 'Invalid' },
-    { code: 'Not part of code', name: 'Sheep Go to Heaven', artist: 'Cake', year: 1998, order: 'Invalid' },
-    { code: 'Not part of code', name: 'The World\'s Biggest Paving Slab', artist: 'English Teacher', year: 2024, order: 'Invalid' },
-    { code: 'Not part of code', name: 'Deeper Underground', artist: 'Jamiroquai', year: 1998, order: 'Invalid' },
-    { code: 'Not part of code', name: 'Float On', artist: 'Modest Mouse', year: 2004, order: 'Invalid' },
-    { code: 'Not part of code', name: 'The Middle', artist: 'Jimmy Eat World', year: 2001, order: 'Invalid' },
-    { code: 'Not part of code', name: 'Overkill', artist: 'Men at Work', year: 1983, order: 'Invalid' },
-    { code: 'Not part of code', name: 'Jesus Just Left Chicago', artist: 'ZZ Top', year: 1973, order: 'Invalid' },
-    { code: 'Not part of code', name: 'Sleigh Ride', artist: 'Ella Fitzgerald', year: 1960, order: 'Invalid' }
+    { code: 'Not part of code', name: 'Party All the Time', artist: 'Eddie Murphy', year: 1985, order: null },
+    { code: 'Not part of code', name: 'Sheep Go to Heaven', artist: 'Cake', year: 1998, order: null },
+    { code: 'Not part of code', name: 'The World\'s Biggest Paving Slab', artist: 'English Teacher', year: 2024, order: null },
+    { code: 'Not part of code', name: 'Deeper Underground', artist: 'Jamiroquai', year: 1998, order: null },
+    { code: 'Not part of code', name: 'Float On', artist: 'Modest Mouse', year: 2004, order: null },
+    { code: 'Not part of code', name: 'The Middle', artist: 'Jimmy Eat World', year: 2001, order: null },
+    { code: 'Not part of code', name: 'Overkill', artist: 'Men at Work', year: 1983, order: null },
+    { code: 'Not part of code', name: 'Jesus Just Left Chicago', artist: 'ZZ Top', year: 1973, order: null },
+    { code: 'Not part of code', name: 'Sleigh Ride', artist: 'Ella Fitzgerald', year: 1960, order: null }
 ];
 
-// Populate the list
+// Render the songs
 const songsList = document.getElementById('songs-list');
-songs.forEach(song => {
+
+songs.forEach((song) => {
     const songElement = document.createElement('div');
     songElement.className = 'song';
     songElement.draggable = true;
@@ -33,36 +34,36 @@ songs.forEach(song => {
     songsList.appendChild(songElement);
 });
 
-let draggedSong = null;
+// Drag-and-drop functionality
+let draggedElement = null;
 
-// Drag and drop functionality
-songsList.addEventListener('dragstart', (e) => {
-    draggedSong = e.target;
-    e.target.classList.add('dragging');
+songsList.addEventListener('dragstart', (event) => {
+    draggedElement = event.target;
+    event.target.classList.add('dragging');
 });
 
-songsList.addEventListener('dragend', (e) => {
-    e.target.classList.remove('dragging');
+songsList.addEventListener('dragend', (event) => {
+    event.target.classList.remove('dragging');
+    draggedElement = null;
 });
 
-songsList.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    const dragging = document.querySelector('.dragging');
-    const afterElement = getDragAfterElement(songsList, e.clientY);
+songsList.addEventListener('dragover', (event) => {
+    event.preventDefault();
+    const afterElement = getDragAfterElement(event.clientY);
     if (afterElement == null) {
-        songsList.appendChild(dragging);
+        songsList.appendChild(draggedElement);
     } else {
-        songsList.insertBefore(dragging, afterElement);
+        songsList.insertBefore(draggedElement, afterElement);
     }
 });
 
-function getDragAfterElement(container, y) {
-    const draggableElements = [...container.querySelectorAll('.song:not(.dragging)')];
+function getDragAfterElement(y) {
+    const draggableElements = [...songsList.querySelectorAll('.song:not(.dragging)')];
     return draggableElements.reduce((closest, child) => {
         const box = child.getBoundingClientRect();
         const offset = y - box.top - box.height / 2;
         if (offset < 0 && offset > closest.offset) {
-            return { offset: offset, element: child };
+            return { offset, element: child };
         } else {
             return closest;
         }
@@ -72,10 +73,10 @@ function getDragAfterElement(container, y) {
 // Check order functionality
 document.getElementById('checkOrder').addEventListener('click', () => {
     const orderedSongs = [...songsList.querySelectorAll('.song')]
-        .map(song => parseInt(song.dataset.order))
-        .filter(order => !isNaN(order)); // Ignore "Invalid" songs
+        .map((song) => parseInt(song.dataset.order))
+        .filter((order) => !isNaN(order)); // Only include songs with valid order numbers
 
-    const correctOrder = Array.from({ length: 11 }, (_, i) => i + 1);
+    const correctOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
     if (JSON.stringify(orderedSongs) === JSON.stringify(correctOrder)) {
         document.getElementById('result').textContent = 'Correct! Code: 3, 1, 5';
