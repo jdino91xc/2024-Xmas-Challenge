@@ -1,4 +1,3 @@
-console.log("Script loaded, preparing to render songs...");
 // Song data
 const songs = [
     { code: 'Up', name: 'Up on the House Top', artist: 'Gene Autry', year: 1947, order: 1 },
@@ -13,79 +12,69 @@ const songs = [
     { code: 'A', name: 'A Sky Full of Stars', artist: 'Coldplay', year: 2014, order: 10 },
     { code: 'Start', name: 'Start the Healing', artist: 'Korn', year: 2021, order: 11 },
     { code: 'Not part of code', name: 'Party All the Time', artist: 'Eddie Murphy', year: 1985, order: null },
-    { code: 'Not part of code', name: 'Sheep Go to Heaven', artist: 'Cake', year: 1998, order: null },
-    { code: 'Not part of code', name: 'The World\'s Biggest Paving Slab', artist: 'English Teacher', year: 2024, order: null },
-    { code: 'Not part of code', name: 'Deeper Underground', artist: 'Jamiroquai', year: 1998, order: null },
-    { code: 'Not part of code', name: 'Float On', artist: 'Modest Mouse', year: 2004, order: null },
-    { code: 'Not part of code', name: 'The Middle', artist: 'Jimmy Eat World', year: 2001, order: null },
-    { code: 'Not part of code', name: 'Overkill', artist: 'Men at Work', year: 1983, order: null },
-    { code: 'Not part of code', name: 'Jesus Just Left Chicago', artist: 'ZZ Top', year: 1973, order: null },
-    { code: 'Not part of code', name: 'Sleigh Ride', artist: 'Ella Fitzgerald', year: 1960, order: null }
+    // Additional songs
 ];
 
-// Render the songs
-const songsList = document.getElementById('songs-list');
-if (!songsList) {
-    console.error("Error: #songs-list element not found.");
-} else {
-    console.log("Rendering songs...");
-}
-songs.forEach((song) => {
+// Shuffle songs for random order
+const shuffledSongs = songs.sort(() => Math.random() - 0.5);
+
+// Render songs in initial column
+const initialSongs = document.getElementById('initial-songs');
+shuffledSongs.forEach((song) => {
     const songElement = document.createElement('div');
     songElement.className = 'song';
     songElement.draggable = true;
     songElement.dataset.order = song.order;
     songElement.textContent = `${song.name} - ${song.artist} (${song.year})`;
-    songsList.appendChild(songElement);
-});
-console.log("Songs rendered successfully.");
-// Drag-and-drop functionality
-let draggedElement = null;
-
-songsList.addEventListener('dragstart', (event) => {
-    draggedElement = event.target;
-    event.target.classList.add('dragging');
+    initialSongs.appendChild(songElement);
 });
 
-songsList.addEventListener('dragend', (event) => {
-    event.target.classList.remove('dragging');
-    draggedElement = null;
-});
-
-songsList.addEventListener('dragover', (event) => {
-    event.preventDefault();
-    const afterElement = getDragAfterElement(event.clientY);
-    if (afterElement == null) {
-        songsList.appendChild(draggedElement);
-    } else {
-        songsList.insertBefore(draggedElement, afterElement);
-    }
-});
-
-function getDragAfterElement(y) {
-    const draggableElements = [...songsList.querySelectorAll('.song:not(.dragging)')];
-    return draggableElements.reduce((closest, child) => {
-        const box = child.getBoundingClientRect();
-        const offset = y - box.top - box.height / 2;
-        if (offset < 0 && offset > closest.offset) {
-            return { offset, element: child };
-        } else {
-            return closest;
-        }
-    }, { offset: Number.NEGATIVE_INFINITY }).element;
+// Create target slots
+const dropArea = document.getElementById('drop-area');
+for (let i = 1; i <= 11; i++) {
+    const slot = document.createElement('div');
+    slot.className = 'target-slot';
+    slot.dataset.targetOrder = i;
+    slot.textContent = `Slot ${i}`;
+    dropArea.appendChild(slot);
 }
 
-// Check order functionality
-document.getElementById('checkOrder').addEventListener('click', () => {
-    const orderedSongs = [...songsList.querySelectorAll('.song')]
-        .map((song) => parseInt(song.dataset.order))
-        .filter((order) => !isNaN(order)); // Only include songs with valid order numbers
+// Drag and drop logic
+let draggedItem = null;
 
-    const correctOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-
-    if (JSON.stringify(orderedSongs) === JSON.stringify(correctOrder)) {
-        document.getElementById('result').textContent = 'Correct! Code: 3, 1, 5';
-    } else {
-        document.getElementById('result').textContent = 'Incorrect. Try again!';
+document.addEventListener('dragstart', (e) => {
+    if (e.target.classList.contains('song')) {
+        draggedItem = e.target;
+        e.target.classList.add('dragging');
     }
+});
+
+document.addEventListener('dragend', (e) => {
+    if (e.target.classList.contains('song')) {
+        e.target.classList.remove('dragging');
+    }
+});
+
+dropArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+});
+
+dropArea.addEventListener('drop', (e) => {
+    if (e.target.classList.contains('target-slot') && !e.target.classList.contains('filled')) {
+        e.target.textContent = draggedItem.textContent;
+        e.target.classList.add('filled');
+        e.target.dataset.filledOrder = draggedItem.dataset.order;
+    }
+});
+
+// Check order
+document.getElementById('checkOrder').addEventListener('click', () => {
+    const slots = document.querySelectorAll('.target-slot');
+    const isCorrect = Array.from(slots).every((slot, index) => {
+        return parseInt(slot.dataset.filledOrder) === index + 1;
+    });
+
+    document.getElementById('result').textContent = isCorrect
+        ? 'Correct! The code is 3, 1, 5.'
+        : 'Incorrect order. Try again!';
 });
