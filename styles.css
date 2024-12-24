@@ -1,50 +1,39 @@
+/* General styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
+    background-color: #f0f8ff;
     text-align: center;
     margin: 0;
     padding: 0;
 }
 
 header {
-    background-color: #ff4d4d;
+    background-color: #4682b4;
     color: white;
     padding: 20px;
 }
 
 #container {
     display: flex;
-    justify-content: space-between; /* Ensure columns are side by side */
+    justify-content: space-between;
     padding: 20px;
-    gap: 20px; /* Adds space between available-songs and drop-area */
+    gap: 20px;
 }
 
+/* Available songs */
 .available-songs {
     display: flex;
-    flex-direction: row; /* Ensures two columns are side by side */
+    flex-direction: row;
     justify-content: space-between;
-    width: 60%; /* Width for the two columns together */
-    gap: 10px; /* Adds space between the two song columns */
+    width: 60%; /* Adjust for space allocation */
+    gap: 10px;
 }
 
 .song-column {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 45%; /* Each column gets 45% of available-songs width */
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: white;
-    border-radius: 10px;
-    max-height: 80vh; /* Ensures the content fits within viewport */
-    overflow-y: auto; /* Adds scroll if content overflows */
-}
-
-.drop-area {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 30%; /* Takes up 30% of the total container width */
+    width: 48%; /* Each column takes half of available-songs */
     padding: 10px;
     border: 1px solid #ccc;
     background-color: white;
@@ -53,13 +42,28 @@ header {
     overflow-y: auto;
 }
 
+/* Drop area for ordering songs */
+.drop-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 35%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 10px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* Song items */
 .song-item, .drop-slot {
     margin: 5px;
-    padding: 5px;
+    padding: 10px;
     background-color: #f1f1f1;
     border-radius: 5px;
-    width: 90%; /* Keeps items uniform */
-    height: 40px; /* Shorter row height */
+    width: 90%; /* Match the drop slots' size */
+    height: 40px; /* Consistent row height */
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -67,10 +71,11 @@ header {
 }
 
 .drop-slot {
-    background-color: #ffe0b3;
+    background-color: #ffe4b5;
     border: 1px dashed #ccc;
 }
 
+/* Button styling */
 button {
     background-color: #4CAF50;
     color: white;
@@ -86,10 +91,7 @@ button:hover {
     background-color: #45a049;
 }
 
-footer {
-    margin-top: 20px;
-}
-
+/* Result message */
 #result {
     font-size: 18px;
     font-weight: bold;
