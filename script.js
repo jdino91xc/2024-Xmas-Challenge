@@ -18,15 +18,20 @@ const songs = [
 // Shuffle songs for random order
 const shuffledSongs = songs.sort(() => Math.random() - 0.5);
 
-// Render songs in initial column
-const initialSongs = document.getElementById('initial-songs');
-shuffledSongs.forEach((song) => {
+// Render songs in two initial columns
+const initialSongsLeft = document.getElementById('initial-songs-left');
+const initialSongsRight = document.getElementById('initial-songs-right');
+shuffledSongs.forEach((song, index) => {
     const songElement = document.createElement('div');
     songElement.className = 'song';
     songElement.draggable = true;
     songElement.dataset.order = song.order;
     songElement.textContent = `${song.name} - ${song.artist} (${song.year})`;
-    initialSongs.appendChild(songElement);
+    if (index % 2 === 0) {
+        initialSongsLeft.appendChild(songElement);
+    } else {
+        initialSongsRight.appendChild(songElement);
+    }
 });
 
 // Create target slots
