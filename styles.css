@@ -14,39 +14,52 @@ header {
 
 #container {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     padding: 20px;
     gap: 20px;
 }
 
 .available-songs {
     display: flex;
-    justify-content: space-between;
-    width: 60%;
+    justify-content: space-between; /* Ensures columns are side by side */
+    width: 60%; /* Ensures the section stays compact */
+    gap: 10px; /* Adds spacing between the two columns */
 }
 
-.song-column, .drop-area {
+.song-column {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 30%; /* Ensures the columns stay properly sized */
-    margin: 10px;
+    width: 48%; /* Two columns take up equal space side by side */
     padding: 10px;
     border: 1px solid #ccc;
     background-color: white;
     border-radius: 10px;
-    height: auto; /* Allows the column to adjust dynamically */
-    max-height: 80vh; /* Limits height to fit within the viewport */
-    overflow-y: auto; /* Adds scroll within the columns if necessary */
+    max-height: 80vh; /* Limits height to fit on one page */
+    overflow-y: auto; /* Adds scroll within the column if necessary */
+}
+
+.drop-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 30%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 10px;
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
 .song-item, .drop-slot {
     margin: 5px;
-    padding: 5px; /* Adjusted padding for a slimmer look */
+    padding: 5px;
     background-color: #f1f1f1;
     border-radius: 5px;
-    width: 80%;
+    width: 90%; /* Keeps items uniform */
     height: 40px; /* Shorter row height */
     box-sizing: border-box;
     display: flex;
