@@ -35,10 +35,10 @@ const correctOrder = [
     "Start the Healing - Korn"
 ];
 
-// Shuffle the songs for the available columns
+// Shuffle songs for display in columns
 const shuffledSongs = [...songs].sort(() => Math.random() - 0.5);
 
-// Populate the two columns
+// Populate two columns with shuffled songs
 const column1 = document.getElementById("column1");
 const column2 = document.getElementById("column2");
 
@@ -75,7 +75,7 @@ for (let i = 0; i < correctOrder.length; i++) {
     dropArea.appendChild(slot);
 }
 
-// Check order
+// Check the order of dropped songs
 function checkOrder() {
     const droppedSongs = Array.from(dropArea.children).map((slot) => slot.textContent.trim());
     if (JSON.stringify(droppedSongs) === JSON.stringify(correctOrder)) {
