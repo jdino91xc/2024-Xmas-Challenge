@@ -20,7 +20,7 @@ header {
 
 .available-songs {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
     width: 45%;
 }
 
