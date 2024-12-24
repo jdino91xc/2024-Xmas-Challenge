@@ -16,12 +16,8 @@ header {
     display: flex;
     justify-content: space-evenly;
     padding: 20px;
-}
-
-.available-songs {
-    display: flex;
-    justify-content: space-between;
-    width: 60%;
+    flex-wrap: wrap;  /* Allow wrapping to fit everything on one page */
+    gap: 20px;
 }
 
 .song-column, .drop-area {
@@ -35,16 +31,16 @@ header {
     border: 1px solid #ccc;
     background-color: white;
     border-radius: 10px;
-    min-height: 300px;
+    min-height: 250px; /* Reduced height to make it shorter */
 }
 
 .song-item, .drop-slot {
     margin: 5px;
-    padding: 10px;
+    padding: 8px;  /* Reduced padding for compactness */
     background-color: #f1f1f1;
     border-radius: 5px;
     width: 80%;
-    min-height: 60px;  /* Enforcing the same height for each row */
+    min-height: 50px;  /* Reduced row height */
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -64,6 +60,7 @@ button {
     cursor: pointer;
     border-radius: 5px;
     border: none;
+    margin-top: 20px;  /* Added some spacing above the button */
 }
 
 button:hover {
