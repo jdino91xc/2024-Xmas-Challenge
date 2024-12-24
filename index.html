@@ -9,9 +9,16 @@
 <body>
     <div class="container">
         <h1>Arrange the Songs in the Correct Order</h1>
-        <p>Drag and drop the songs to match the correct "Song Order" (1–11). Only these 11 are part of the puzzle, but all songs are displayed.</p>
-        <div id="songs-list">
-            <!-- Songs will be dynamically inserted here -->
+        <p>Drag the songs into the correct order (1–11) in the right column. Only 11 songs are part of the puzzle, but all songs are shown below in random order.</p>
+        <div class="columns">
+            <!-- Two columns for initial songs -->
+            <div id="initial-songs" class="songs-column"></div>
+            <div id="target-songs" class="songs-column">
+                <h3>Drop Here</h3>
+                <div id="drop-area">
+                    <!-- Empty spaces for correct order -->
+                </div>
+            </div>
         </div>
         <button id="checkOrder">Check Order</button>
         <div id="result"></div>
