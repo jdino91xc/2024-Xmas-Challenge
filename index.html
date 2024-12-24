@@ -3,252 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Holiday Song Puzzle</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            font-family: 'Merriweather', serif;
-            background: linear-gradient(to bottom, #ffecd2, #fcb69f);
-            color: #333;
-            padding: 20px;
-            margin: 0;
-            background-image: url('https://www.transparenttextures.com/patterns/white-diamond.png');
-        }
-
-        header {
-            text-align: center;
-            color: #fff;
-            background-color: #c0392b;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        header h1 {
-            font-size: 3em;
-            color: #fff;
-            text-shadow: 2px 2px 5px #8e44ad;
-        }
-
-        header h2 {
-            font-size: 1.5em;
-            color: #f7dc6f;
-        }
-
-        #container {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .column {
-            width: 30%;
-            padding: 10px;
-            background-color: #fefefe;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            overflow-y: auto;
-            max-height: 500px;
-        }
-
-        .song {
-            padding: 8px;
-            background-color: #f7f7f7;
-            border: 1px solid #d5d5d5;
-            border-radius: 4px;
-            margin: 5px;
-            cursor: grab;
-            transition: background-color 0.2s;
-        }
-
-        .song:hover {
-            background-color: #f9e79f;
-        }
-
-        .target-slot {
-            padding: 12px;
-            border: 2px dashed #b03a2e;
-            border-radius: 4px;
-            margin: 5px;
-            text-align: center;
-            font-size: 1.2em;
-            color: #2c3e50;
-            background-color: #fef9e7;
-        }
-
-        .target-slot.filled {
-            background-color: #d5f5e3;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 1.2em;
-            background-color: #16a085;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        button:hover {
-            background-color: #1abc9c;
-        }
-
-        #result {
-            font-size: 1.5em;
-            text-align: center;
-            color: #e74c3c;
-            margin-top: 20px;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 0.9em;
-            color: #bdc3c7;
-        }
-
-        #initial-songs-left, #initial-songs-right {
-            max-height: 500px;
-            overflow-y: auto;
-            background-color: #fefefe;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        #drop-area {
-            background-color: #fcf3cf;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        #drop-area .target-slot {
-            border: 2px dashed #d35400;
-            margin: 10px;
-        }
-
-        header img {
-            width: 50px;
-            height: 50px;
-            margin: 0 10px;
-            vertical-align: middle;
-        }
-    </style>
+    <title>Song Order Puzzle</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>🎄 Holiday Song Puzzle 🎵</h1>
-        <h2>Arrange the songs to unlock the code!</h2>
+        <h1>Holiday Song Order Puzzle</h1>
+        <h2>Drag and drop the songs in the correct order!</h2>
     </header>
 
     <div id="container">
-        <div id="initial-songs-left" class="column">
-            <h3>Song List (Column 1)</h3>
-            <!-- Songs dynamically added here -->
-        </div>
-        <div id="initial-songs-right" class="column">
-            <h3>Song List (Column 2)</h3>
-            <!-- Songs dynamically added here -->
-        </div>
-        <div id="drop-area" class="column">
-            <h3>Arrange Songs</h3>
-            <!-- Drop targets dynamically added here -->
-        </div>
+        <div id="initial-songs-left" class="column"></div>
+        <div id="initial-songs-right" class="column"></div>
+        <div id="drop-area" class="column"></div>
     </div>
 
-    <button onclick="checkOrder()">Check Order</button>
-    <p id="result"></p>
-
     <footer>
-        <p>❄️ Happy Holidays! Enjoy solving the puzzle! 🎅</p>
+        <button onclick="checkOrder()">Check Order</button>
+        <div id="result"></div>
     </footer>
 
-    <script>
-        const songs = [
-            { song: 'Up on the House Top', artist: 'Gene Autry', year: '1947', order: 1, link: 'https://youtu.be/ISqjyIdmZQs?si=WTdA1iMiofjEwfjc' },
-            { song: 'Up on the Roof', artist: 'The Drifters', year: '1964', order: 2, link: 'https://youtu.be/puM1k-S86nE?si=IpUMhrozHvwDc02T' },
-            { song: 'Down by the River', artist: 'Neil Young', year: '1969', order: 3, link: 'https://youtu.be/0tb_o6CkvHY?si=RBRPR9bK4VZuDefE' },
-            { song: 'Down on the Corner', artist: 'CCR', year: '1969', order: 4, link: 'https://youtu.be/vrMvblpZFq0?si=rQC61QZKmNVIAM9w' },
-            { song: 'Left in the Dark', artist: 'Barbra Streisand', year: '1984', order: 5, link: 'https://youtu.be/st1bTsBQH-0?si=fJhCNUiVWcEPLFKl' },
-            { song: 'Fight for your Right', artist: 'Beastie Boys', year: '1986', order: 6, link: 'https://youtu.be/eBShN8qT4lk?si=XKhHdHKVxworlrzP' },
-            { song: 'She Left Me on Friday', artist: 'Shed Seven', year: '1999', order: 7, link: 'https://youtu.be/ibPJy99GI94?si=0RRlhqku8MqKjxhp' },
-            { song: 'Everything in its Right Place', artist: 'Radiohead', year: '2000', order: 8, link: 'https://youtu.be/onRk0sjSgFU?si=_9BWAmfN8LfeGFJb' },
-            { song: 'B&E', artist: 'Nothing', year: '2012', order: 9, link: 'https://youtu.be/3B_8c5dDIeE?si=7Lw4L3iXm8yCJGAU' },
-            { song: 'A Sky Full of Stars', artist: 'Coldplay', year: '2014', order: 10, link: 'https://youtu.be/VPRjCeoBqrI?si=0r3CSGpt0yOQIJaf' },
-            { song: 'Start the Healing', artist: 'Korn', year: '2021', order: 11, link: 'https://youtu.be/Aupnj1KpjCg?si=bq3KjNXL32NmFw4f' }
-        ];
-
-        const initialSongsLeft = document.getElementById('initial-songs-left');
-        const initialSongsRight = document.getElementById('initial-songs-right');
-        const dropArea = document.getElementById('drop-area');
-
-        // Shuffle the songs randomly
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        }
-
-        function createSongElement(song) {
-            const songElement = document.createElement('div');
-            songElement.classList.add('song');
-            songElement.draggable = true;
-            songElement.innerText = `${song.song} - ${song.artist} (${song.year})`;
-            songElement.dataset.order = song.order;
-            songElement.addEventListener('dragstart', dragStart);
-            return songElement;
-        }
-
-        function dragStart(e) {
-            e.dataTransfer.setData('text', e.target.dataset.order);
-        }
-
-        function createDropSlot(order) {
-            const slot = document.createElement('div');
-            slot.classList.add('target-slot');
-            slot.dataset.order = order;
-            slot.addEventListener('dragover', dragOver);
-            slot.addEventListener('drop', drop);
-            return slot;
-        }
-
-        function dragOver(e) {
-            e.preventDefault();
-        }
-
-        function drop(e) {
-            const order = e.target.dataset.order;
-            const songOrder = e.dataTransfer.getData('text');
-            const targetSlot = document.querySelector(`[data-order="${order}"]`);
-            if (songOrder == order) {
-                e.target.classList.add('filled');
-                document.getElementById('result').textContent = "You did it! 🎉";
-            } else {
-                document.getElementById('result').textContent = "Try again!";
-            }
-        }
-
-        shuffleArray(songs);
-        songs.forEach((song, index) => {
-            if (index < 10) {
-                initialSongsLeft.appendChild(createSongElement(song));
-            } else {
-                initialSongsRight.appendChild(createSongElement(song));
-            }
-        });
-
-        for (let i = 1; i <= 11; i++) {
-            dropArea.appendChild(createDropSlot(i));
-        }
-
-        function checkOrder() {
-            // Additional logic to check the correct order of songs
-        }
-    </script>
+    <script src="scripts.js"></script>
 </body>
 </html>
