@@ -23,36 +23,29 @@ document.addEventListener("DOMContentLoaded", () => {
         { title: "I Saw Mommy Kissing Santa Claus", year: 1952 },
     ];
 
-    // Randomly shuffle the songs array
+    // Shuffle the songs
     const shuffledSongs = [...songs].sort(() => Math.random() - 0.5);
 
-    // Get columns for left two columns
-    const leftColumn = document.getElementById("left-column");
-    const rightColumn = document.getElementById("right-column");
-
-    // Check if columns exist
-    if (!leftColumn || !rightColumn) {
-        console.error("Left or right column is missing in the HTML.");
-        return;
-    }
+    // Get columns for available songs
+    const column1 = document.getElementById("column1");
+    const column2 = document.getElementById("column2");
+    const dropArea = document.getElementById("dropArea");
 
     // Populate the left two columns with shuffled songs
     shuffledSongs.forEach((song, index) => {
-        const column = index % 2 === 0 ? leftColumn : rightColumn;
+        const column = index % 2 === 0 ? column1 : column2; // Alternate between columns
         const songItem = document.createElement("div");
         songItem.className = "song-item";
         songItem.draggable = true;
-        songItem.textContent = `${song.title} (${song.year})`; // Add year to song title
+        songItem.textContent = `${song.title} (${song.year})`;
         songItem.dataset.index = index;
 
-        console.log(`Adding song: ${song.title} (${song.year}) to column ${index % 2 === 0 ? "left" : "right"}`);
-
+        // Add drag event listener
         songItem.addEventListener("dragstart", dragStart);
         column.appendChild(songItem);
     });
 
-    // Populate the drop slots in the right column
-    const dropArea = document.getElementById("drop-area");
+    // Create empty slots in the drop area
     songs.forEach(() => {
         const dropSlot = document.createElement("div");
         dropSlot.className = "drop-slot";
@@ -83,19 +76,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Check the order
-    document.getElementById("check-order").addEventListener("click", () => {
-        const dropSlots = document.querySelectorAll(".drop-slot");
-        const isCorrect = [...dropSlots].every(
-            (slot, index) => slot.dataset.index == index
-        );
-
-        const result = document.getElementById("result");
-        if (isCorrect) {
-            result.textContent = "Correct! The code is 3, 1, 5.";
-            result.style.color = "green";
-        } else {
-            result.textContent = "Incorrect. Try again!";
-            result.style.color = "red";
-        }
-    });
-});
+    window.checkOrder 
