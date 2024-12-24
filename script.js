@@ -25,10 +25,11 @@ const songs = [
 // Randomly shuffle the songs array
 const shuffledSongs = [...songs].sort(() => Math.random() - 0.5);
 
-// Load the songs into the left two columns
+// Get columns for left two columns
 const leftColumn = document.getElementById("left-column");
 const rightColumn = document.getElementById("right-column");
 
+// Populate the left two columns with shuffled songs
 shuffledSongs.forEach((song, index) => {
     const column = index % 2 === 0 ? leftColumn : rightColumn;
     const songItem = document.createElement("div");
@@ -36,6 +37,10 @@ shuffledSongs.forEach((song, index) => {
     songItem.draggable = true;
     songItem.textContent = `${song.title} (${song.year})`; // Add year to song title
     songItem.dataset.index = index;
+
+    // Debugging: Check what is being added
+    console.log(`Adding song: ${song.title} (${song.year}) to column ${index % 2 === 0 ? "left" : "right"}`);
+    
     songItem.addEventListener("dragstart", dragStart);
     column.appendChild(songItem);
 });
