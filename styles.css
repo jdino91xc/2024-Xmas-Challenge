@@ -14,18 +14,39 @@ header {
 
 #container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     padding: 20px;
 }
 
-.column {
-    width: 30%;
-    min-height: 300px;
-    border: 1px solid #ccc;
+.available-songs {
+    display: flex;
+    flex-wrap: wrap;
+    width: 45%;
+}
+
+.song-column {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    margin: 10px;
     padding: 10px;
+    border: 1px solid #ccc;
     background-color: white;
     border-radius: 10px;
+    min-height: 300px;
+}
+
+.drop-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%;
     margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 10px;
+    min-height: 300px;
 }
 
 button {
@@ -46,17 +67,7 @@ footer {
     margin-top: 20px;
 }
 
-#available-songs {
-    display: flex;
-    justify-content: space-between;
-}
-
-.song-column {
-    width: 45%;
-    padding: 10px;
-}
-
-#initial-songs div, #drop-area div {
+#available-songs .song-item {
     margin: 10px;
     padding: 10px;
     background-color: #f1f1f1;
@@ -64,10 +75,18 @@ footer {
     cursor: pointer;
 }
 
-#initial-songs div {
-    background-color: #d9f7be;
+#drop-area .drop-slot {
+    margin: 10px;
+    padding: 10px;
+    background-color: #ffe0b3;
+    border-radius: 5px;
+    width: 80%;
+    min-height: 50px;
+    border: 1px dashed #ccc;
 }
 
-#drop-area div {
-    background-color: #ffe0b3;
+#result {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
 }
