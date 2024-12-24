@@ -1,131 +1,63 @@
 body {
-    font-family: 'Merriweather', serif;
-    background: linear-gradient(to bottom, #ffecd2, #fcb69f);
-    color: #333;
-    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    text-align: center;
     margin: 0;
-    background-image: url('https://www.transparenttextures.com/patterns/white-diamond.png');
+    padding: 0;
 }
 
 header {
-    text-align: center;
-    color: #fff;
-    background-color: #c0392b;
+    background-color: #ff4d4d;
+    color: white;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-header h1 {
-    font-size: 3em;
-    color: #fff;
-    text-shadow: 2px 2px 5px #8e44ad;
-}
-
-header h2 {
-    font-size: 1.5em;
-    color: #f7dc6f;
 }
 
 #container {
     display: flex;
-    justify-content: space-between;
-    gap: 20px;
+    justify-content: space-around;
     padding: 20px;
 }
 
 .column {
     width: 30%;
+    min-height: 300px;
+    border: 1px solid #ccc;
     padding: 10px;
-    background-color: #fefefe;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-    max-height: 500px;
-}
-
-.song {
-    padding: 8px;
-    background-color: #f7f7f7;
-    border: 1px solid #d5d5d5;
-    border-radius: 4px;
-    margin: 5px;
-    cursor: grab;
-    transition: background-color 0.2s;
-}
-
-.song:hover {
-    background-color: #f9e79f;
-}
-
-.target-slot {
-    padding: 12px;
-    border: 2px dashed #b03a2e;
-    border-radius: 4px;
-    margin: 5px;
-    text-align: center;
-    font-size: 1.2em;
-    color: #2c3e50;
-    background-color: #fef9e7;
-}
-
-.target-slot.filled {
-    background-color: #d5f5e3;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 1.2em;
-    background-color: #16a085;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-}
-
-button:hover {
-    background-color: #1abc9c;
-}
-
-#result {
-    font-size: 1.5em;
-    text-align: center;
-    color: #e74c3c;
-    margin-top: 20px;
-}
-
-footer {
-    text-align: center;
-    margin-top: 30px;
-    font-size: 0.9em;
-    color: #bdc3c7;
-}
-
-#initial-songs-left, #initial-songs-right {
-    max-height: 500px;
-    overflow-y: auto;
-    background-color: #fefefe;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-#drop-area {
-    background-color: #fcf3cf;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-#drop-area .target-slot {
-    border: 2px dashed #d35400;
+    background-color: white;
+    border-radius: 10px;
     margin: 10px;
 }
 
-header img {
-    width: 50px;
-    height: 50px;
-    margin: 0 10px;
-    vertical-align: middle;
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 32px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+footer {
+    margin-top: 20px;
+}
+
+#initial-songs div, #drop-area div {
+    margin: 10px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#initial-songs div {
+    background-color: #d9f7be;
+}
+
+#drop-area div {
+    background-color: #ffe0b3;
 }
