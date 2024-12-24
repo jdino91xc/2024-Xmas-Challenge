@@ -9,7 +9,16 @@ const songs = [
     { song: 'Everything in its Right Place', artist: 'Radiohead', release: 2000 },
     { song: 'B&E', artist: 'Nothing', release: 2012 },
     { song: 'A Sky Full of Stars', artist: 'Coldplay', release: 2014 },
-    { song: 'Start the Healing', artist: 'Korn', release: 2021 }
+    { song: 'Start the Healing', artist: 'Korn', release: 2021 },
+    { song: 'Party All the Time', artist: 'Eddie Murphy', release: 1985 },
+    { song: 'Sheep Go to Heaven', artist: 'Cake', release: 1998 },
+    { song: 'The World\'s Biggest Paving Slab', artist: 'English Teacher', release: 2024 },
+    { song: 'Deeper Underground', artist: 'Jamiroquai', release: 1998 },
+    { song: 'Float On', artist: 'Modest Mouse', release: 2004 },
+    { song: 'The Middle', artist: 'Jimmy Eat World', release: 2001 },
+    { song: 'Overkill', artist: 'Men at Work', release: 1983 },
+    { song: 'Jesus Just Left Chicago', artist: 'ZZ Top', release: 1973 },
+    { song: 'Sleigh Ride', artist: 'Ella Fitzgerald', release: 1960 }
 ];
 
 let shuffledSongs = shuffleArray(songs);
@@ -70,7 +79,7 @@ function handleDrop(event, dropSlot) {
 // Set up the puzzle
 function setupPuzzle() {
     shuffledSongs.forEach((song, index) => {
-        if (index < 6) {
+        if (index < 10) {
             createSongItem(song, leftColumn);
         } else {
             createSongItem(song, rightColumn);
