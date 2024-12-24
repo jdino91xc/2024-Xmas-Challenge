@@ -12,26 +12,37 @@ const songs = [
     { code: 'A', name: 'A Sky Full of Stars', artist: 'Coldplay', year: 2014, order: 10 },
     { code: 'Start', name: 'Start the Healing', artist: 'Korn', year: 2021, order: 11 },
     { code: 'Not part of code', name: 'Party All the Time', artist: 'Eddie Murphy', year: 1985, order: null },
-    // Additional songs
+    { code: 'Not part of code', name: 'Sheep Go to Heaven', artist: 'Cake', year: 1998, order: null },
+    { code: 'Not part of code', name: 'The World\'s Biggest Paving Slab', artist: 'English Teacher', year: 2024, order: null },
+    { code: 'Not part of code', name: 'Deeper Underground', artist: 'Jamiroquai', year: 1998, order: null },
+    { code: 'Not part of code', name: 'Float On', artist: 'Modest Mouse', year: 2004, order: null },
+    { code: 'Not part of code', name: 'The Middle', artist: 'Jimmy Eat World', year: 2001, order: null },
+    { code: 'Not part of code', name: 'Overkill', artist: 'Men at Work', year: 1983, order: null },
+    { code: 'Not part of code', name: 'Jesus Just Left Chicago', artist: 'ZZ Top', year: 1973, order: null },
+    { code: 'Not part of code', name: 'Sleigh Ride', artist: 'Ella Fitzgerald', year: 1960, order: null }
 ];
 
 // Shuffle songs for random order
 const shuffledSongs = songs.sort(() => Math.random() - 0.5);
 
-// Render songs in two initial columns
+// Divide songs into two columns
+const leftColumn = shuffledSongs.slice(0, Math.ceil(shuffledSongs.length / 2));
+const rightColumn = shuffledSongs.slice(Math.ceil(shuffledSongs.length / 2));
+
+// Render songs in columns
 const initialSongsLeft = document.getElementById('initial-songs-left');
 const initialSongsRight = document.getElementById('initial-songs-right');
-shuffledSongs.forEach((song, index) => {
-    const songElement = document.createElement('div');
-    songElement.className = 'song';
-    songElement.draggable = true;
-    songElement.dataset.order = song.order;
-    songElement.textContent = `${song.name} - ${song.artist} (${song.year})`;
-    if (index % 2 === 0) {
-        initialSongsLeft.appendChild(songElement);
-    } else {
-        initialSongsRight.appendChild(songElement);
-    }
+
+[leftColumn, rightColumn].forEach((column, index) => {
+    const target = index === 0 ? initialSongsLeft : initialSongsRight;
+    column.forEach(song => {
+        const songElement = document.createElement('div');
+        songElement.className = 'song';
+        songElement.draggable = true;
+        songElement.dataset.order = song.order;
+        songElement.textContent = `${song.name} - ${song.artist} (${song.year})`;
+        target.appendChild(songElement);
+    });
 });
 
 // Create target slots
