@@ -16,8 +16,13 @@ header {
     display: flex;
     justify-content: space-evenly;
     padding: 20px;
-    flex-wrap: wrap;  /* Allow wrapping to fit everything on one page */
     gap: 20px;
+}
+
+.available-songs {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
 }
 
 .song-column, .drop-area {
@@ -25,22 +30,24 @@ header {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 45%;
+    width: 30%; /* Ensures the columns stay properly sized */
     margin: 10px;
     padding: 10px;
     border: 1px solid #ccc;
     background-color: white;
     border-radius: 10px;
-    min-height: 250px; /* Reduced height to make it shorter */
+    height: auto; /* Allows the column to adjust dynamically */
+    max-height: 80vh; /* Limits height to fit within the viewport */
+    overflow-y: auto; /* Adds scroll within the columns if necessary */
 }
 
 .song-item, .drop-slot {
     margin: 5px;
-    padding: 8px;  /* Reduced padding for compactness */
+    padding: 5px; /* Adjusted padding for a slimmer look */
     background-color: #f1f1f1;
     border-radius: 5px;
     width: 80%;
-    min-height: 50px;  /* Reduced row height */
+    height: 40px; /* Shorter row height */
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -60,7 +67,7 @@ button {
     cursor: pointer;
     border-radius: 5px;
     border: none;
-    margin-top: 20px;  /* Added some spacing above the button */
+    margin-top: 20px;
 }
 
 button:hover {
@@ -75,10 +82,4 @@ footer {
     font-size: 18px;
     font-weight: bold;
     margin-top: 20px;
-}
-
-#container {
-    display: flex;
-    justify-content: space-evenly;
-    gap: 20px;
 }
