@@ -16,23 +16,23 @@ header {
 #container {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     padding: 20px;
     gap: 20px;
 }
 
 /* Available songs */
-.available-songs {
+#available-songs {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     width: 60%; /* Adjust for space allocation */
-    gap: 10px;
+    gap: 20px;
 }
 
 .song-column {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     width: 48%; /* Each column takes half of available-songs */
     padding: 10px;
     border: 1px solid #ccc;
@@ -62,12 +62,9 @@ header {
     padding: 10px;
     background-color: #f1f1f1;
     border-radius: 5px;
-    width: 90%; /* Match the drop slots' size */
-    height: 40px; /* Consistent row height */
+    text-align: center;
+    height: 40px; /* Uniform height */
     box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .drop-slot {
