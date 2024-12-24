@@ -1,3 +1,32 @@
+body {
+    font-family: 'Merriweather', serif;
+    background: linear-gradient(to bottom, #ffecd2, #fcb69f);
+    color: #333;
+    padding: 20px;
+    margin: 0;
+    background-image: url('https://www.transparenttextures.com/patterns/white-diamond.png');
+}
+
+header {
+    text-align: center;
+    color: #fff;
+    background-color: #c0392b;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 3em;
+    color: #fff;
+    text-shadow: 2px 2px 5px #8e44ad;
+}
+
+header h2 {
+    font-size: 1.5em;
+    color: #f7dc6f;
+}
+
 #container {
     display: flex;
     justify-content: space-between;
@@ -13,25 +42,6 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
     max-height: 500px;
-}
-
-header {
-    text-align: center;
-    background-color: #c0392b;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-header h1 {
-    font-size: 2.5em;
-    color: #fff;
-    text-shadow: 2px 2px 5px #8e44ad;
-}
-
-header h2 {
-    font-size: 1.2em;
-    color: #f7dc6f;
 }
 
 .song {
@@ -83,4 +93,39 @@ button:hover {
     text-align: center;
     color: #e74c3c;
     margin-top: 20px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: #bdc3c7;
+}
+
+#initial-songs-left, #initial-songs-right {
+    max-height: 500px;
+    overflow-y: auto;
+    background-color: #fefefe;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#drop-area {
+    background-color: #fcf3cf;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#drop-area .target-slot {
+    border: 2px dashed #d35400;
+    margin: 10px;
+}
+
+header img {
+    width: 50px;
+    height: 50px;
+    margin: 0 10px;
+    vertical-align: middle;
 }
