@@ -1,32 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-    <header>
-    <h1>🎄 Holiday Song Puzzle 🎵</h1>
-    <h2>Arrange the songs to unlock the code!</h2>
-</header>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Song Puzzle</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Arrange the Songs in the Correct Order</h1>
-        <p>Drag the songs into the correct order (1–11) in the right column. Only 11 songs are part of the puzzle, but all songs are shown below in random order.</p>
-        <div class="columns">
-            <!-- Two columns for initial songs -->
-            <div id="initial-songs-left" class="songs-column"></div>
-            <div id="initial-songs-right" class="songs-column"></div>
-            <!-- Third column for the drop area -->
-            <div id="target-songs" class="songs-column">
-                <h3>Drop Here</h3>
-                <div id="drop-area"></div>
-            </div>
-        </div>
-        <button id="checkOrder">Check Order</button>
-        <div id="result"></div>
+<div id="container">
+    <div id="initial-songs-left" class="column">
+        <h3>Song List (Column 1)</h3>
+        <!-- Songs dynamically added here -->
     </div>
-    <script src="script.js"></script>
-</body>
-</html>
+    <div id="initial-songs-right" class="column">
+        <h3>Song List (Column 2)</h3>
+        <!-- Songs dynamically added here -->
+    </div>
+    <div id="drop-area" class="column">
+        <h3>Arrange Songs</h3>
+        <!-- Drop targets dynamically added here -->
+    </div>
+</div>
+<button onclick="checkOrder()">Check Order</button>
+<p id="result"></p>
