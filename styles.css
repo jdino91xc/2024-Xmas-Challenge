@@ -24,9 +24,11 @@ header {
     width: 60%;
 }
 
-.song-column {
+.song-column, .drop-area {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     width: 45%;
     margin: 10px;
     padding: 10px;
@@ -36,17 +38,22 @@ header {
     min-height: 300px;
 }
 
-.drop-area {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 35%;
-    margin: 10px;
+.song-item, .drop-slot {
+    margin: 5px;
     padding: 10px;
-    border: 1px solid #ccc;
-    background-color: white;
-    border-radius: 10px;
-    min-height: 300px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    width: 80%;
+    min-height: 60px;  /* Enforcing the same height for each row */
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.drop-slot {
+    background-color: #ffe0b3;
+    border: 1px dashed #ccc;
 }
 
 button {
@@ -67,40 +74,14 @@ footer {
     margin-top: 20px;
 }
 
-#available-songs .song-item {
-    margin: 5px;
-    padding: 10px;
-    background-color: #f1f1f1;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#drop-area .drop-slot {
-    margin: 5px;
-    padding: 5px;
-    background-color: #ffe0b3;
-    border-radius: 5px;
-    width: 80%;
-    min-height: 60px;  /* Set a consistent height for all rows */
-    border: 1px dashed #ccc;
-}
-
-/* Ensure all columns are equally spaced */
-.song-column, .drop-area {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+#result {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
 }
 
 #container {
     display: flex;
     justify-content: space-evenly;
     gap: 20px;
-}
-
-#result {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 20px;
 }
