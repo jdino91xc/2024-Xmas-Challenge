@@ -17,7 +17,7 @@ const songs = [
     "Float On - Modest Mouse (2004)",
     "The Middle - Jimmy Eat World (2001)",
     "Overkill - Men at Work (1983)",
-    "Jesus Just Left Chicago - ZZ Top (1973)",
+    "La Grange - ZZ Top (1973)",
     "Sleigh Ride - Ella Fitzgerald (1960)"
 ];
 
